@@ -1,5 +1,17 @@
 {
   "format": "emulonx-skins",
   "version": 1,
-  "skins": []
+  "skins": [
+    {
+      "id": "classic-enhanced-kiruthe",
+      "name": "Classic Enhanced",
+      "author": "KiruTheProot-Creative",
+      "description": "Classic, but in a more metallic, and cleaner style :)",
+      "version": "1.0",
+      "skin": "https://raw.githubusercontent.com/KiruTheProot-Creative/EmulonX-Skins/main/skins/classic-enhanced-kiruthe/skin.emxd",
+      "preview": "https://raw.githubusercontent.com/KiruTheProot-Creative/EmulonX-Skins/main/skins/classic-enhanced-kiruthe/preview.png",
+      "size": 1019861,
+      "sha256": "22b736632113b69bd781a04e1eb1836789326d36b2152cbcb96a8d7b91912345"
+    }
+  ]
 }
