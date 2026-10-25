@@ -1,0 +1,26 @@
+# Checks every submitted skin (pull requests) and says what to fix.
+name: Check skins
+on:
+  pull_request:
+    paths: [ "skins/**" ]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Only skin folders changed
+        run: |
+          changed=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          echo "$changed"
+          if echo "$changed" | grep -vqE '^skins/[^/]+/(skin\.emxd|preview\.png|info\.json)$'; then
+            echo "::error::A submission may only add or change files in one skins/<name>/ folder (skin.emxd, preview.png, info.json)."; exit 1; fi
+          if [ "$(echo "$changed" | cut -d/ -f2 | sort -u | wc -l)" -gt 1 ]; then
+            echo "::error::Please submit one skin at a time."; exit 1; fi
+      - name: Check the skin
+        run: |
+          folders=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | cut -d/ -f1-2 | sort -u)
+          python3 tools/check_skin.py $folders
